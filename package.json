@@ -5,7 +5,7 @@
   "scripts": {
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "vue-cli-service serve --port 8080"
+    "serve": "vue-cli-service serve "
   },
   "dependencies": {
     "@kugatsu/vuenotification": "^1.1.4",

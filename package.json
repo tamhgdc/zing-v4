@@ -5,7 +5,8 @@
   "scripts": {
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "serve": "vue-cli-service serve "
+    "serve": "vue-cli-service serve ",
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "@kugatsu/vuenotification": "^1.1.4",

@@ -140,6 +140,7 @@ export default new Vuex.Store({
       commit("set_playing_status", false);
       commit("set_audio_playing", false);
       commit("set_current_time_percent", 0);
+      commit("set_controller_status", true);
       let encodeId = state.currentAlbumData.song.items[state.currentIndex].encodeId;
       if (state.currentSongEncodeId === encodeId) {
         commit("set_audio_playing", true);

@@ -6,7 +6,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "serve": "vue-cli-service serve ",
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
     "@kugatsu/vuenotification": "^1.1.4",
@@ -17,8 +17,12 @@
     "autoprefixer": "^9",
     "axios": "^0.25.0",
     "core-js": "^3.6.5",
+    "express": "~4.16.1",
     "gsap": "^3.9.1",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.15",
     "postcss": "^7",
+    "serve-static": "^1.14.2",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
     "vue": "^2.6.11",
     "vue-axios": "^3.4.0",

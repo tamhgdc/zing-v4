@@ -48,7 +48,6 @@ body ::-webkit-scrollbar-thumb {
 .zm-layout {
   display: flex;
   width: 100%;
-  min-width: 768px;
   height: 100vh;
   background: #170f23;
 }

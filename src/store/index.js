@@ -10,24 +10,12 @@ export default new Vuex.Store({
     isControllerShow: false,
     isPlaying: false,
     toast: null,
-    currentAlbumData: localStorage.getItem("currentAlbumData")
-      ? JSON.parse(localStorage.getItem("currentAlbumData"))
-      : null,
-    currentIndex: localStorage.getItem("currentIndex")
-      ? JSON.parse(localStorage.getItem("currentIndex"))
-      : 0,
-    currentSongEncodeId: localStorage.getItem("currentSongEncodeId")
-      ? JSON.parse(localStorage.getItem("currentSongEncodeId"))
-      : null,
-    currentSong: localStorage.getItem("currentSong")
-      ? JSON.parse(localStorage.getItem("currentSong"))
-      : null,
-    currentTime: localStorage.getItem("currentTime")
-      ? JSON.parse(localStorage.getItem("currentTime"))
-      : 0,
-    currentTimePercent: localStorage.getItem("currentTimePercent")
-      ? JSON.parse(localStorage.getItem("currentTimePercent"))
-      : 0,
+    currentAlbumData: localStorage.getItem("currentAlbumData") ? JSON.parse(localStorage.getItem("currentAlbumData")) : null,
+    currentIndex: localStorage.getItem("currentIndex") ? JSON.parse(localStorage.getItem("currentIndex")) : 0,
+    currentSongEncodeId: localStorage.getItem("currentSongEncodeId") ? JSON.parse(localStorage.getItem("currentSongEncodeId")) : null,
+    currentSong: localStorage.getItem("currentSong") ? JSON.parse(localStorage.getItem("currentSong")) : null,
+    currentTime: localStorage.getItem("currentTime") ? JSON.parse(localStorage.getItem("currentTime")) : 0,
+    currentTimePercent: localStorage.getItem("currentTimePercent") ? JSON.parse(localStorage.getItem("currentTimePercent")) : 0,
   },
   mutations: {
     set_toast(state, obj) {

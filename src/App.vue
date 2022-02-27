@@ -20,6 +20,7 @@ export default {
   components: { SidebarComponent, HeaderComponent, ControllerComponent },
   mounted() {
     this.$store.commit("set_toast", this.$toastr);
+    this.$store.commit("set_alertify", this.$alertify);
   },
   computed: {
     ...mapState([

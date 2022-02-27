@@ -3,6 +3,9 @@ export default {
   set_toast(state, obj) {
     state.toast = obj;
   },
+  set_alertify(state, obj) {
+    state.alertify = obj;
+  },
   initial_audio(state) {
     state.audio = new Audio();
   },
@@ -18,6 +21,9 @@ export default {
   set_controller_status(state, status) {
     state.isControllerShow = status;
   },
+  set_initial_time(state, valueInMinute) {
+    state.initialTimestamp = new Date().valueOf() + 60000 * valueInMinute;
+  },
   set_loading_to_play_status(state, status) {
     state.isLoadingToPlay = status;
   },
@@ -28,6 +34,10 @@ export default {
   set_is_repeat(state, status) {
     state.isRepeat = status;
     localStorage.setItem("isRepeat", JSON.stringify(status));
+  },
+  set_is_shuffle(state, status) {
+    state.isShuffle = status;
+    localStorage.setItem("isShuffle", JSON.stringify(status));
   },
   set_playing_status(state, status) {
     state.isPlaying = status;
@@ -75,7 +85,6 @@ export default {
         document.querySelector(".now-playing").scrollIntoView({ behavior: "smooth", block: "center" });
         this.dispatch("handlePlayCurrentSong");
       } else {
-        this.commit("set_loading_to_play_status", false);
         state.toast.e(response.msg);
       }
     });

@@ -128,6 +128,9 @@ export default {
       this.$store.commit("set_current_album_data", this.albumData);
       this.$store.commit("set_current_song_source", { song, index });
     },
+    handlePlayAll() {
+      this.$toastr.i("Chức năng này chưa cập nhật...");
+    },
   },
   computed: {
     ...mapState([

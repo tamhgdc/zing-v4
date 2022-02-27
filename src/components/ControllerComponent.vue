@@ -16,7 +16,12 @@
         <div class="player-controls-center">
           <div class="player-controls-item">
             <div class="actions">
-              <button class="zm-controls-btn desktop:is-hover-circle btn-shuffle" title="Bật phát ngẫu nhiên">
+              <button
+                class="zm-controls-btn desktop:is-hover-circle btn-shuffle"
+                :class="{ active: isShuffle }"
+                @click="handleSetShuffle()"
+                title="Bật phát ngẫu nhiên"
+              >
                 <ThemifyIcon icon="control-shuffle" />
               </button>
               <button class="zm-controls-btn desktop:is-hover-circle btn-pre" @click="handlePreSong()">
@@ -34,7 +39,12 @@
               <button class="zm-controls-btn desktop:is-hover-circle btn-next" @click="handleNextSong">
                 <ThemifyIcon icon="control-skip-forward" />
               </button>
-              <button class="zm-controls-btn desktop:is-hover-circle btn-repeat" title="Bật phát lại tất cả">
+              <button
+                class="zm-controls-btn desktop:is-hover-circle btn-repeat"
+                :class="{ active: isRepeat }"
+                @click="handleSetRepeat()"
+                title="Bật phát lại một bài hát"
+              >
                 <ThemifyIcon icon="infinite" />
               </button>
             </div>
@@ -108,6 +118,16 @@ export default {
       console.log("next");
       this.$store.dispatch("handleNextSong");
     },
+    handleSetRepeat() {
+      console.log("set repeat");
+      this.$store.commit("set_is_repeat", !this.isRepeat);
+      this.isRepeat ? this.$toastr.i("Bạn vừa bật chức năng lặp lại một bài hát") : this.$toastr.i("Bạn vừa tắt chức năng lặp lại một bài hát");
+    },
+    handleSetShuffle() {
+      console.log("set shuffle");
+      this.$store.commit("set_is_shuffle", !this.isShuffle);
+      this.isShuffle ? this.$toastr.i("Bạn vừa bật chức năng phát ngẫu nhiên") : this.$toastr.i("Bạn vừa tắt chức năng phát ngẫu nhiên");
+    },
   },
   computed: {
     ...mapState([
@@ -115,6 +135,8 @@ export default {
       "isPlaying",
       "toast",
       "currentIndex",
+      "isRepeat",
+      "isShuffle",
       "isControllerShow",
       "currentAlbumData",
       "currentSongData",
@@ -344,6 +366,10 @@ export default {
   transition: all 0.2s linear;
   -webkit-appearance: none;
   -webkit-transition: 0.2s;
+}
+.btn-shuffle.active,
+.btn-repeat.active {
+  color: #c662ef;
 }
 @media screen and (max-width: 768px) {
   .player-controls-left,

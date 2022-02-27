@@ -5,26 +5,37 @@ export default {
     commit("set_current_time_percent", 0);
     commit("set_playing_status", false);
     commit("set_loading_to_play_status", true);
-    let totalLength = state.currentAlbumData.song.total - 1;
-    let currentIndex = state.currentIndex;
-    currentIndex++;
-
-    if (currentIndex <= totalLength) {
-      commit("set_current_index", currentIndex);
+    if (state.isShuffle) {
+      let newIndex;
+      do {
+        newIndex = Math.floor(Math.random() * state.currentAlbumData.song.total);
+      } while (newIndex === state.currentIndex);
+      commit("set_current_index", newIndex);
       commit("set_current_song_source", {
-        song: state.currentAlbumData.song.items[currentIndex],
-        index: currentIndex,
+        song: state.currentAlbumData.song.items[newIndex],
+        index: newIndex,
       });
-      console.log(state.currentIndex);
-      console.log(state.currentAlbumData);
     } else {
-      commit("set_current_index", 0);
-      commit("set_current_song_source", {
-        song: state.currentAlbumData.song.items[0],
-        index: 0,
-      });
-      console.log(state.currentIndex);
-      console.log(state.currentAlbumData);
+      let totalLength = state.currentAlbumData.song.total - 1;
+      let currentIndex = state.currentIndex;
+      currentIndex++;
+      if (currentIndex <= totalLength) {
+        commit("set_current_index", currentIndex);
+        commit("set_current_song_source", {
+          song: state.currentAlbumData.song.items[currentIndex],
+          index: currentIndex,
+        });
+        console.log(state.currentIndex);
+        console.log(state.currentAlbumData);
+      } else {
+        commit("set_current_index", 0);
+        commit("set_current_song_source", {
+          song: state.currentAlbumData.song.items[0],
+          index: 0,
+        });
+        console.log(state.currentIndex);
+        console.log(state.currentAlbumData);
+      }
     }
   },
   handlePreSong({ commit, state }) {
@@ -33,28 +44,40 @@ export default {
     commit("set_current_time_percent", 0);
     commit("set_playing_status", false);
     commit("set_loading_to_play_status", true);
-    let currentIndex = state.currentIndex;
-    let totalLength = state.currentAlbumData.song.total - 1;
-    currentIndex--;
-    if (currentIndex < 0) {
-      commit("set_current_index", totalLength);
+    if (state.isShuffle) {
+      let newIndex;
+      do {
+        newIndex = Math.floor(Math.random() * state.currentAlbumData.song.total);
+      } while (newIndex === state.currentIndex);
+      commit("set_current_index", newIndex);
       commit("set_current_song_source", {
-        song: state.currentAlbumData.song.items[totalLength],
-        index: totalLength,
+        song: state.currentAlbumData.song.items[newIndex],
+        index: newIndex,
       });
-      console.log(state.currentIndex);
-      console.log(state.currentAlbumData);
     } else {
-      commit("set_current_index", currentIndex);
-      commit("set_current_song_source", {
-        song: state.currentAlbumData.song.items[currentIndex],
-        index: currentIndex,
-      });
-      console.log(state.currentIndex);
-      console.log(state.currentAlbumData);
+      let currentIndex = state.currentIndex;
+      let totalLength = state.currentAlbumData.song.total - 1;
+      currentIndex--;
+      if (currentIndex < 0) {
+        commit("set_current_index", totalLength);
+        commit("set_current_song_source", {
+          song: state.currentAlbumData.song.items[totalLength],
+          index: totalLength,
+        });
+        console.log(state.currentIndex);
+        console.log(state.currentAlbumData);
+      } else {
+        commit("set_current_index", currentIndex);
+        commit("set_current_song_source", {
+          song: state.currentAlbumData.song.items[currentIndex],
+          index: currentIndex,
+        });
+        console.log(state.currentIndex);
+        console.log(state.currentAlbumData);
+      }
     }
   },
-  audioOnPlaying({ commit, state }) {
+  audioOnPlaying({ commit, state, dispatch }) {
     document.querySelector(".now-playing").scrollIntoView({ behavior: "smooth", block: "center" });
     state.audio.addEventListener("timeupdate", () => {
       if (state.audio) {
@@ -65,6 +88,14 @@ export default {
         commit("set_loading_to_play_status", false);
         commit("set_current_time", currentTime);
         commit("set_current_time_percent", Math.round(percent));
+        if (new Date().valueOf() > state.initialTimestamp) {
+          dispatch("handlePause");
+          state.alertify.confirm("Bạn đã nghe quá 1 giờ, bạn có muốn tiếp tục phát", () => {
+            commit("set_initial_time", 60);
+            dispatch("handlePlayCurrentSong");
+          });
+          console.log("Bạn đã nghe quá 1 giờ. Để tiếp tục phát, vui lòng refresh lại trang, cảm ơn!...");
+        }
       }
     });
   },
@@ -75,7 +106,7 @@ export default {
       commit("set_current_time", 0);
       commit("set_current_time_percent", 0);
       commit("destroy_audio", {});
-      dispatch("handleNextSong");
+      state.isRepeat ? dispatch("handlePlayCurrentSong") : dispatch("handleNextSong");
       console.log("Audio has been ended!");
     });
   },

@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import HomeView from "@/views/desktop/HomeView.vue";
 
 Vue.use(VueRouter);
 
@@ -7,30 +8,27 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("@/views/Home.vue"),
+    component: HomeView,
   },
   {
     path: "/about",
     name: "About",
-    component: () => import("@/views/About.vue"),
+    component: () => import(/* webpackChunkName: "about" */ "@/views/desktop/AboutView.vue"),
   },
   {
     path: "/album/:slugName/:id",
     name: "Albums",
-    component: () => import("@/views/Albums.vue"),
+    component: () => import(/* webpackChunkName: "album" */ "@/views/desktop/AlbumsView.vue"),
   },
   {
     path: "/playlist/:slugName/:id",
     name: "Playlist",
-    component: () => import("@/views/Albums.vue"),
-    meta: {
-      title: "Playlist",
-    },
+    component: () => import(/* webpackChunkName: "playlist" */ "@/views/desktop/AlbumsView.vue"),
   },
   {
     path: "*",
     name: "NotFound",
-    component: () => import("@/views/404.vue"),
+    component: () => import(/* webpackChunkName: "notfound" */ "@/views/desktop/404View.vue"),
   },
 ];
 

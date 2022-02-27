@@ -1,26 +1,41 @@
 <template>
   <div id="app">
     <div class="zm-layout" :class="{ 'has-player': isControllerShow }">
-      <Sidebar />
-      <Header />
+      <sidebar-component />
+      <header-component />
       <div class="zm-mainpage">
         <router-view />
       </div>
-      <Controller />
+      <controller-component />
     </div>
   </div>
 </template>
+
 <script>
 import { mapState } from "vuex";
-import Sidebar from "@/components/Sidebar.vue";
-import Header from "@/components/Header.vue";
-import Controller from "@/components/Controller.vue";
+import SidebarComponent from "@/components/SidebarComponent.vue";
+import HeaderComponent from "@/components/HeaderComponent.vue";
+import ControllerComponent from "@/components/ControllerComponent.vue";
 export default {
-  components: { Sidebar, Header, Controller },
+  components: { SidebarComponent, HeaderComponent, ControllerComponent },
   mounted() {
     this.$store.commit("set_toast", this.$toastr);
   },
-  computed: { ...mapState(["isControllerShow"]) },
+  computed: {
+    ...mapState([
+      "audio",
+      "isPlaying",
+      "toast",
+      "currentIndex",
+      "isControllerShow",
+      "currentAlbumData",
+      "currentSongSrc",
+      "currentSongEncodeId",
+      "currentSong",
+      "currentTime",
+      "currentTimePercent",
+    ]),
+  },
 };
 </script>
 
@@ -43,6 +58,9 @@ body ::-webkit-scrollbar-thumb {
   z-index: 30;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 0 6px rgb(135 135 135);
+}
+* {
+  scroll-behavior: smooth;
 }
 
 .zm-layout {
@@ -72,6 +90,11 @@ body ::-webkit-scrollbar-thumb {
   padding: 35px 59px 59px 59px;
 }
 
+@media screen and (max-width: 640px) {
+  .zm-mainpage main {
+    padding: 6px;
+  }
+}
 @media screen and (max-width: 1133px) {
   .zm-sidebar {
     width: 70px;

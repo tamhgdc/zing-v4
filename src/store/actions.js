@@ -81,6 +81,7 @@ export default {
     });
   },
   handlePlayCurrentSong({ commit, dispatch, state }) {
+    commit("set_controller_status", true);
     commit("destroy_audio", {});
     commit("set_loading_to_play_status", true);
     if (state.currentSongSrc) {

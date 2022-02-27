@@ -7,10 +7,10 @@ var app = express();
 app.use(logger("dev"));
 app.use("/app", express.static(path.join(__dirname, "dist")));
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+  res.redirect("/app");
 });
-app.get("/*/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+app.get("*", function (req, res) {
+  res.redirect("/app");
 });
 
 module.exports = app;

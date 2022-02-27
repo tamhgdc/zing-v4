@@ -75,6 +75,7 @@ export default {
         document.querySelector(".now-playing").scrollIntoView({ behavior: "smooth", block: "center" });
         this.dispatch("handlePlayCurrentSong");
       } else {
+        this.commit("set_loading_to_play_status", false);
         state.toast.e(response.msg);
       }
     });

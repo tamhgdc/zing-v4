@@ -55,7 +55,6 @@ export default {
     }
   },
   audioOnPlaying({ commit, state }) {
-    // state.smoothScroll({ scrollTo: document.querySelector(".now-playing") });
     document.querySelector(".now-playing").scrollIntoView({ behavior: "smooth", block: "center" });
     state.audio.addEventListener("timeupdate", () => {
       if (state.audio) {

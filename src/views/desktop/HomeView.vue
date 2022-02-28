@@ -113,9 +113,6 @@ export default {
         page2: null,
         page3: null,
       },
-      metaInfo: {
-        title: "Zing MP3 | Nghe tải nhạc chất lượng cao",
-      },
     };
   },
   async mounted() {
@@ -134,7 +131,7 @@ export default {
   components: { Carousel, HomeSkeleton },
   metaInfo() {
     return {
-      title: this.metaInfo.title,
+      title: this.$store.state.title,
     };
   },
 };

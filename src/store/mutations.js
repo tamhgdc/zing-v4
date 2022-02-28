@@ -18,6 +18,9 @@ export default {
       state.audio = null;
     }
   },
+  set_title(state, title) {
+    state.title = title;
+  },
   set_controller_status(state, status) {
     state.isControllerShow = status;
   },

@@ -7,11 +7,7 @@
           <div class="media playlist-header sticky text-center">
             <div class="media-content font-bold">
               <figure class="zm-card-image rounded-md mb-3">
-                <img
-                  class="select-none"
-                  :src="albumData.thumbnailM"
-                  style="width: 100%"
-                />
+                <img class="select-none" :src="albumData.thumbnailM" style="width: 100%" />
                 <span class="overlay" @click="handlePlay()">
                   <ThemifyIcon icon="control-play" />
                 </span>
@@ -26,13 +22,8 @@
               <p class="text-gray-400 font-medium select-none">
                 {{ albumData.artistsNames }}
               </p>
-              <p class="text-gray-400 font-medium select-none">
-                {{ likesFormat(albumData.like) }} người yêu thích
-              </p>
-              <button
-                class="zm-btn-play-all text-white font-bold py-2 px-7 mt-3 rounded-full"
-                @click="handlePlayAll(albumData)"
-              >
+              <p class="text-gray-400 font-medium select-none">{{ likesFormat(albumData.like) }} người yêu thích</p>
+              <button class="zm-btn-play-all text-white font-bold py-2 px-7 mt-3 rounded-full" @click="handlePlayAll(albumData)">
                 <ThemifyIcon icon="control-play" /> Phát tất cả
               </button>
             </div>
@@ -57,12 +48,7 @@
               >
                 <div class="col-span-2 ... flex items-center">
                   <span class="mr-2"><ThemifyIcon icon="music-alt" /></span>
-                  <img
-                    class="mr-2 cursor-pointer"
-                    style="width: 40px"
-                    :src="song.thumbnail"
-                    @click="selectSongToPlay({ albumData, i })"
-                  />
+                  <img class="mr-2 cursor-pointer" style="width: 40px" :src="song.thumbnail" @click="selectSongToPlay({ albumData, i })" />
                   <div class="zm-song-title">
                     <p class="text-white capitalize">
                       {{ song.title }}
@@ -104,9 +90,6 @@ export default {
     return {
       albumData: null,
       loading: true,
-      metaInfo: {
-        title: "Zing MP3 | Nghe tải nhạc chất lượng cao",
-      },
     };
   },
   mounted() {
@@ -115,7 +98,7 @@ export default {
         if (response.status) {
           this.loading = false;
           this.albumData = response.data;
-          this.metaInfo.title = response.data.title + " | Album 320 lossless";
+          this.$store.commit("set_title", response.data.title + " | Album 320 lossless");
         } else {
           this.$router.push("/");
         }
@@ -134,7 +117,7 @@ export default {
   computed: { ...mapState(["currentIndex"]) },
   metaInfo() {
     return {
-      title: this.metaInfo.title,
+      title: this.$store.state.title,
     };
   },
 };

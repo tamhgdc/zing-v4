@@ -96,9 +96,6 @@ export default {
     return {
       albumData: null,
       loading: true,
-      metaInfo: {
-        title: this.currentSongData ? this.currentSongData.title : "Zing MP3 | Nghe tải nhạc chất lượng cao",
-      },
     };
   },
   mounted() {
@@ -107,6 +104,7 @@ export default {
         if (response.status) {
           this.loading = false;
           this.albumData = response.data;
+          this.$store.commit("set_title", response.data.title);
         } else {
           this.$router.push("/");
         }
@@ -122,7 +120,6 @@ export default {
     toCapitalize: Helper.toCapitalize,
     handlePlayThisSong(object) {
       let { song, index } = object;
-      this.metaInfo.title = this.toCapitalize(song.title);
       this.$store.commit("destroy_audio", {});
       this.$store.commit("set_loading_to_play_status", true);
       this.$store.commit("set_current_album_data", this.albumData);
@@ -150,7 +147,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: this.metaInfo.title,
+      title: this.$store.state.title,
     };
   },
   components: { AlbumsSkeleton },

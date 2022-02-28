@@ -84,6 +84,7 @@ export default {
         let durationTime = Math.round(state.audio.duration);
         let currentTime = Math.round(state.audio.currentTime);
         let percent = (currentTime * 100) / durationTime;
+        commit("set_title", state.currentSongData.title);
         commit("set_playing_status", true);
         commit("set_loading_to_play_status", false);
         commit("set_current_time", currentTime);

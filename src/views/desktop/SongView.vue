@@ -17,6 +17,6 @@ export default {
       title: this.$store.state.title,
     };
   },
-  components: { AlbumsSkeleton },
+  components: {},
 };
 </script>

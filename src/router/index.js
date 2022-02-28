@@ -21,6 +21,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "album" */ "@/views/desktop/AlbumsView.vue"),
   },
   {
+    path: "/bai-hat/:slugName/:id",
+    name: "bai-hat",
+    component: () => import(/* webpackChunkName: "bai-hat" */ "@/views/desktop/SongView.vue"),
+  },
+  {
     path: "/playlist/:slugName/:id",
     name: "Playlist",
     component: () => import(/* webpackChunkName: "playlist" */ "@/views/desktop/AlbumsView.vue"),

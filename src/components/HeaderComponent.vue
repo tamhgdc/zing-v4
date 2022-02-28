@@ -10,7 +10,7 @@
               <ThemifyIcon icon="search" />
             </button>
             <div class="input__wrapper">
-              <input type="text" placeholder="Nhập tên bài hát, nghệ sĩ hoặc MV…" />
+              <input type="text" placeholder="Nhập tên bài hát, nghệ sĩ hoặc MV…" @input="handleSearch" />
             </div>
           </div>
           <button type="reset" class="zm-btn zm-reset-btn">
@@ -18,12 +18,58 @@
           </button>
           <ul class="search-sugestion">
             <div class="sugestion__wrapper">
-              <div class="search-title">Đề xuất cho bạn</div>
-              <li class="sugest__item"><ThemifyIcon icon="stats-up" /> Chay ve khoc</li>
-              <li class="sugest__item"><ThemifyIcon icon="stats-up" /> Thay moi co gai</li>
-              <li class="sugest__item"><ThemifyIcon icon="stats-up" /> Khong tron ven</li>
-              <li class="sugest__item"><ThemifyIcon icon="stats-up" /> #Zing-chart</li>
-              <li class="sugest__item"><ThemifyIcon icon="stats-up" /> Zing choice</li>
+              <template v-if="searchData">
+                <template v-if="searchData.top">
+                  <div class="mb-4">
+                    <div class="search-title">Top kết quả tìm kiếm</div>
+                    <router-link :to="searchData.top.link">
+                      <li class="sugest__item">
+                        <ThemifyIcon icon="stats-up" /><img :src="searchData.top.thumbnail" /> {{ searchData.top.name || searchData.top.title }}
+                      </li>
+                    </router-link>
+                  </div>
+                </template>
+                <template v-if="searchData.songs">
+                  <div class="mb-4">
+                    <div class="search-title">Bài hát</div>
+                    <div v-for="(song, index) in searchData.songs" :key="index">
+                      <router-link :to="song.link">
+                        <li class="sugest__item"><ThemifyIcon icon="stats-up" /><img :src="song.thumbnail" /> {{ song.title }}</li>
+                      </router-link>
+                    </div>
+                  </div>
+                </template>
+                <template v-if="searchData.playlists">
+                  <div class="mb-4">
+                    <div class="search-title">Danh sách phát</div>
+                    <div v-for="(playlist, index) in searchData.playlists" :key="index">
+                      <router-link :to="playlist.link">
+                        <li class="sugest__item"><ThemifyIcon icon="stats-up" /><img :src="playlist.thumbnail" /> {{ playlist.title }}</li>
+                      </router-link>
+                    </div>
+                  </div>
+                </template>
+                <template v-if="searchData.artists">
+                  <div class="mb-4">
+                    <div class="search-title">Nghệ sĩ</div>
+                    <div v-for="(artist, index) in searchData.artists" :key="index">
+                      <router-link :to="artist.link">
+                        <li class="sugest__item"><ThemifyIcon icon="stats-up" /><img :src="artist.thumbnail" /> {{ artist.name }}</li>
+                      </router-link>
+                    </div>
+                  </div>
+                </template>
+                <template v-if="searchData.videos">
+                  <div class="mb-4">
+                    <div class="search-title">Videos</div>
+                    <div v-for="(video, index) in searchData.videos" :key="index">
+                      <router-link :to="video.link">
+                        <li class="sugest__item"><ThemifyIcon icon="stats-up" /><img :src="video.thumbnail" /> {{ video.title }}</li>
+                      </router-link>
+                    </div>
+                  </div>
+                </template>
+              </template>
             </div>
           </ul>
         </form>
@@ -36,6 +82,35 @@
     </div>
   </header>
 </template>
+
+<script>
+import Zingmp3 from "@/services/api.service.js";
+export default {
+  data() {
+    return {
+      searchData: null,
+    };
+  },
+  methods: {
+    handleSearch(e) {
+      let keyword = e.path[0].value;
+      if (!keyword) {
+        this.searchData = null;
+      }
+      Zingmp3.search(keyword)
+        .then((response) => {
+          console.log(response);
+          if (response.status) {
+            this.searchData = response.data;
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
+  },
+};
+</script>
 
 <style>
 .zm-header {
@@ -177,20 +252,20 @@ button {
 .search__container .input__wrapper input::placeholder {
   color: #eee;
 }
-.search__container:focus-within {
+.search:hover .search__container {
   border-radius: 20px 20px 0 0;
   background: #432275;
 }
-.search__container:focus-within ~ .search-sugestion {
+.search:hover .search-sugestion {
   display: block;
 }
 .search-sugestion {
   display: none;
   position: absolute;
-  overflow: hidden;
+  overflow: scroll;
   width: 100%;
-  height: auto;
-  min-height: 0;
+  max-height: 70vh;
+  /* min-height: 0; */
   background: #432275;
   z-index: 5;
   border-bottom-left-radius: 20px;
@@ -209,6 +284,18 @@ button {
   padding: 8px 10px;
   transition: all linear 0.01s;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  width: 100%;
+}
+.search-sugestion .sugest__item img {
+  width: 30px;
+  margin-right: 4px;
+  border-radius: 4px;
 }
 .search-sugestion .sugest__item:hover {
   background: hsla(0, 0%, 100%, 0.1);

@@ -3,19 +3,11 @@
     <Carousel :loading="loading" :data="data.page1" />
     <HomeSkeleton :loading="loading" />
     <div class="zm-section" v-if="!loading">
-      <div
-        class="zm-content mb-10"
-        v-for="dataItem in data.page1"
-        :key="dataItem.encodeId"
-      >
+      <div class="zm-content mb-10" v-for="dataItem in data.page1" :key="dataItem.encodeId">
         <div class="mb-10" v-if="dataItem.sectionType === 'playlist'">
           <h1 class="font-bold text-2xl mb-5">{{ dataItem.title }}</h1>
           <div class="grid grid-cols-5 gap-5">
-            <div
-              class="w-full music-card"
-              v-for="item in dataItem.items"
-              :key="item.encodeId"
-            >
+            <div class="w-full music-card" v-for="item in dataItem.items" :key="item.encodeId">
               <div :title="item.title">
                 <figure class="zm-card-image rounded-md">
                   <router-link :to="item.link">
@@ -42,19 +34,11 @@
           </div>
         </div>
       </div>
-      <div
-        class="zm-content mb-10"
-        v-for="dataItem in data.page2"
-        :key="dataItem.encodeId"
-      >
+      <div class="zm-content mb-10" v-for="dataItem in data.page2" :key="dataItem.encodeId">
         <div class="mb-10" v-if="dataItem.sectionType === 'playlist'">
           <h1 class="font-bold text-2xl mb-5">{{ dataItem.title }}</h1>
           <div class="grid grid-cols-5 gap-5">
-            <div
-              class="w-full music-card"
-              v-for="item in dataItem.items"
-              :key="item.encodeId"
-            >
+            <div class="w-full music-card" v-for="item in dataItem.items" :key="item.encodeId">
               <div :title="item.title">
                 <figure class="zm-card-image rounded-md">
                   <router-link :to="item.link">
@@ -81,19 +65,11 @@
           </div>
         </div>
       </div>
-      <div
-        class="zm-content mb-10"
-        v-for="dataItem in data.page3"
-        :key="dataItem.encodeId"
-      >
+      <div class="zm-content mb-10" v-for="dataItem in data.page3" :key="dataItem.encodeId">
         <div class="mb-10" v-if="dataItem.sectionType === 'playlist'">
           <h1 class="font-bold text-2xl mb-5">{{ dataItem.title }}</h1>
           <div class="grid grid-cols-5 gap-5">
-            <div
-              class="w-full music-card"
-              v-for="item in dataItem.items"
-              :key="item.encodeId"
-            >
+            <div class="w-full music-card" v-for="item in dataItem.items" :key="item.encodeId">
               <div :title="item.title">
                 <figure class="zm-card-image rounded-md">
                   <router-link :to="item.link">

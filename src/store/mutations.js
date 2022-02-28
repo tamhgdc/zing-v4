@@ -86,6 +86,7 @@ export default {
         this.dispatch("handlePlayCurrentSong");
       } else {
         state.toast.e(response.msg);
+        this.commit("set_loading_to_play_status", false);
       }
     });
   },

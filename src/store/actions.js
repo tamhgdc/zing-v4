@@ -102,6 +102,7 @@ export default {
   },
   audioOnEnded({ state, commit, dispatch }) {
     state.audio.addEventListener("ended", () => {
+      commit("set_title", "Zing MP3 | Nghe tải nhạc chất lượng cao");
       commit("set_playing_status", false);
       commit("set_loading_to_play_status", false);
       commit("set_current_time", 0);

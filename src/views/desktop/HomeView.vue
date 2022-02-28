@@ -116,6 +116,7 @@ export default {
     };
   },
   async mounted() {
+    this.$store.commit("set_title", "Zing MP3 | Nghe tải nhạc chất lượng cao");
     const page1Data = await Zingmp3.getHome();
     const page2Data = await Zingmp3.getHome(2);
     const page3Data = await Zingmp3.getHome(3);

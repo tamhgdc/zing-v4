@@ -2,6 +2,7 @@ export default {
   audio: null,
   toast: null,
   alertify: null,
+  homeData: false,
   isPlaying: false,
   isLoadingToPlay: false,
   title: "Zing MP3 | Nghe tải nhạc chất lượng cao",

@@ -16,11 +16,25 @@ import { mapState } from "vuex";
 import SidebarComponent from "@/components/SidebarComponent.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
 import ControllerComponent from "@/components/ControllerComponent.vue";
+import Zingmp3 from "@/services/api.service.js";
+
 export default {
   components: { SidebarComponent, HeaderComponent, ControllerComponent },
-  mounted() {
+  async mounted() {
     this.$store.commit("set_toast", this.$toastr);
     this.$store.commit("set_alertify", this.$alertify);
+    const page1Data = await Zingmp3.getHome();
+    const page2Data = await Zingmp3.getHome(2);
+    const page3Data = await Zingmp3.getHome(3);
+    if (page1Data.status && page2Data.status && page3Data.status) {
+      this.$store.commit("set_home_data", {
+        page1: page1Data.data.items,
+        page2: page2Data.data.items,
+        page3: page3Data.data.items,
+      });
+    } else {
+      this.$toastr.e(page1Data.msg, "Có lỗi xảy ra!");
+    }
   },
   computed: {
     ...mapState([

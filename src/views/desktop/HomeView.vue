@@ -1,9 +1,9 @@
 <template>
   <main>
-    <Carousel :loading="loading" :data="data.page1" />
-    <HomeSkeleton :loading="loading" />
-    <div class="zm-section" v-if="!loading">
-      <div class="zm-content mb-10" v-for="dataItem in data.page1" :key="dataItem.encodeId">
+    <Carousel :loading="!homeData" :data="homeData.page1" />
+    <HomeSkeleton :loading="!homeData" />
+    <div class="zm-section" v-if="homeData">
+      <div class="zm-content mb-10" v-for="dataItem in homeData.page1" :key="dataItem.encodeId">
         <div class="mb-10" v-if="dataItem.sectionType === 'playlist'">
           <h1 class="font-bold text-2xl mb-5">{{ dataItem.title }}</h1>
           <div class="grid grid-cols-5 gap-5 mobile:grid-cols-2 mobile:gap-2 tablet:grid-cols-3 tablet:gap-3">
@@ -34,7 +34,7 @@
           </div>
         </div>
       </div>
-      <div class="zm-content mb-10" v-for="dataItem in data.page2" :key="dataItem.encodeId">
+      <div class="zm-content mb-10" v-for="dataItem in homeData.page2" :key="dataItem.encodeId">
         <div class="mb-10" v-if="dataItem.sectionType === 'playlist'">
           <h1 class="font-bold text-2xl mb-5">{{ dataItem.title }}</h1>
           <div class="grid grid-cols-5 gap-5 mobile:grid-cols-2 mobile:gap-2 tablet:grid-cols-3 tablet:gap-3">
@@ -65,7 +65,7 @@
           </div>
         </div>
       </div>
-      <div class="zm-content mb-10" v-for="dataItem in data.page3" :key="dataItem.encodeId">
+      <div class="zm-content mb-10" v-for="dataItem in homeData.page3" :key="dataItem.encodeId">
         <div class="mb-10" v-if="dataItem.sectionType === 'playlist'">
           <h1 class="font-bold text-2xl mb-5">{{ dataItem.title }}</h1>
           <div class="grid grid-cols-5 gap-5 mobile:grid-cols-2 mobile:gap-2 tablet:grid-cols-3 tablet:gap-3">
@@ -103,32 +103,16 @@
 <script>
 import Carousel from "@/components/CarouselComponent.vue";
 import HomeSkeleton from "@/components/HomeSkeleton.vue";
-import Zingmp3 from "@/services/api.service.js";
+import { mapState } from "vuex";
+
 export default {
   data() {
-    return {
-      loading: true,
-      data: {
-        page1: null,
-        page2: null,
-        page3: null,
-      },
-    };
+    return {};
   },
-  async mounted() {
+  mounted() {
     this.$store.commit("set_title", "Zing MP3 | Nghe tải nhạc chất lượng cao");
-    const page1Data = await Zingmp3.getHome();
-    const page2Data = await Zingmp3.getHome(2);
-    const page3Data = await Zingmp3.getHome(3);
-    if (page1Data.status && page2Data.status && page3Data.status) {
-      this.loading = false;
-      this.data.page1 = page1Data.data.items;
-      this.data.page2 = page2Data.data.items;
-      this.data.page3 = page3Data.data.items;
-    } else {
-      this.$toastr.e(page1Data.msg, "Có lỗi xảy ra!");
-    }
   },
+  computed: { ...mapState(["homeData"]) },
   components: { Carousel, HomeSkeleton },
   metaInfo() {
     return {

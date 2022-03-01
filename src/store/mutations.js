@@ -21,6 +21,9 @@ export default {
   set_title(state, title) {
     state.title = title;
   },
+  set_home_data(state, data) {
+    state.homeData = data;
+  },
   set_controller_status(state, status) {
     state.isControllerShow = status;
   },

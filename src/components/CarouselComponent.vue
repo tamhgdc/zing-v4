@@ -11,9 +11,9 @@
         :autoplay="true"
         :autoplaySpeed="3000"
       >
-        <router-link v-for="(item, index) in data[0].items" :key="index" :to="item.link">
-          <img class="rounded-md" :src="item.banner" />
-        </router-link>
+        <div v-for="(item, index) in data[0].items" :key="index">
+          <img class="rounded-md cursor-pointer" :src="item.banner" @click="seclecthisBanner(item)" />
+        </div>
       </VueSlickCarousel>
     </div>
   </div>
@@ -31,6 +31,16 @@ export default {
   },
   components: { VueSlickCarousel },
   props: ["loading", "data"],
+  methods: {
+    seclecthisBanner(item) {
+      console.log(item);
+      if (item.type === 1) {
+        this.$store.state.toast.e("Tính năng phát một bài hát chưa được cập nhật");
+      } else if (item.type === 4) {
+        this.$router.push(item.link);
+      }
+    },
+  },
   mounted() {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       this.slidesToShow = 1;

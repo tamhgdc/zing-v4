@@ -96,4 +96,21 @@ export default {
       }
     });
   },
+  select_song_to_play(state, object) {
+    let { encodeId, index } = object;
+    Zingmp3.stream(encodeId).then((response) => {
+      if (response.status) {
+        state.currentSongSrc = response.data["128"];
+        localStorage.setItem("currentSongSrc", JSON.stringify(response.data["128"]));
+        this.commit("set_current_song_encodeId", encodeId);
+        this.commit("set_current_index", index);
+        this.commit("set_current_time", 0);
+        this.commit("set_current_time_percent", 0);
+        this.dispatch("handlePlayCurrentSong");
+      } else {
+        state.toast.e(response.msg);
+        this.commit("set_loading_to_play_status", false);
+      }
+    });
+  },
 };

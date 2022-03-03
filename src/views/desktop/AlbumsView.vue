@@ -42,16 +42,11 @@
                 class="border-t-2 grid mobile:grid-cols-3 tablet:grid-cols-3 grid-cols-4 gap-4 text-gray-400 p-3 font-medium md:hover:bg-white md:hover:bg-opacity-10 select-none"
                 :ref="currentIndex === index ? 'playing' : 'noplay'"
                 :class="{ 'now-playing': currentIndex === index, 'opacity-50': song.streamingStatus === 2 }"
+                @click="song.streamingStatus !== 2 ? handlePlayThisSong({ song, index }) : null"
               >
                 <div class="mobile:col-span-2 tablet:col-span-2 col-span-2 ... flex items-center">
                   <span class="mr-2"><ThemifyIcon icon="music-alt" /></span>
-                  <img
-                    class="mr-2"
-                    style="width: 40px"
-                    :class="{ 'cursor-pointer': song.streamingStatus != 2 }"
-                    :src="song.thumbnail"
-                    @click="song.streamingStatus !== 2 ? handlePlayThisSong({ song, index }) : null"
-                  />
+                  <img class="mr-2" style="width: 40px" :class="{ 'cursor-pointer': song.streamingStatus != 2 }" :src="song.thumbnail" />
                   <div class="zm-song-title">
                     <div>
                       <p class="text-white capitalize">
@@ -97,6 +92,28 @@ export default {
       albumData: null,
       loading: true,
     };
+  },
+  created() {
+    this.$watch(
+      () => this.$route.params.id.split(".")[0],
+      (id) => {
+        // react to route changes...
+        this.loading = true;
+        Zingmp3.getPlaylistDetail(id)
+          .then((response) => {
+            if (response.status) {
+              this.loading = false;
+              this.albumData = response.data;
+              this.$store.commit("set_title", response.data.title);
+            } else {
+              this.$router.push("/");
+            }
+          })
+          .catch(() => {
+            this.$router.push("/");
+          });
+      }
+    );
   },
   mounted() {
     Zingmp3.getPlaylistDetail(this.$route.params.id.split(".")[0])

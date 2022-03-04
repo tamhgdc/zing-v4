@@ -118,7 +118,6 @@ export default {
       commit("set_title", "Zing MP3 | Nghe tải nhạc chất lượng cao");
       commit("set_playing_status", false);
       commit("set_loading_to_play_status", false);
-      commit("destroy_audio", {});
       console.log("Audio has been paused!");
     });
   },

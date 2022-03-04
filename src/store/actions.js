@@ -113,7 +113,7 @@ export default {
       console.log("Audio has been ended!");
     });
   },
-  audioOnPause({ state, commit, dispatch }) {
+  audioOnPause({ state, commit }) {
     state.audio.addEventListener("pause", () => {
       commit("set_title", "Zing MP3 | Nghe tải nhạc chất lượng cao");
       commit("set_playing_status", false);

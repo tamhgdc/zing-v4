@@ -89,6 +89,7 @@ export default {
         commit("set_loading_to_play_status", false);
         commit("set_current_time", currentTime);
         commit("set_current_time_percent", Math.round(percent));
+        dispatch("audioOnPause");
         if (new Date().valueOf() > state.initialTimestamp) {
           dispatch("handlePause");
           state.alertify.confirm("Bạn đã nghe quá 1 giờ, bạn có muốn tiếp tục phát", () => {
@@ -110,6 +111,15 @@ export default {
       commit("destroy_audio", {});
       state.isRepeat ? dispatch("handlePlayCurrentSong") : dispatch("handleNextSong");
       console.log("Audio has been ended!");
+    });
+  },
+  audioOnPause({ state, commit, dispatch }) {
+    state.audio.addEventListener("pause", () => {
+      commit("set_title", "Zing MP3 | Nghe tải nhạc chất lượng cao");
+      commit("set_playing_status", false);
+      commit("set_loading_to_play_status", false);
+      commit("destroy_audio", {});
+      console.log("Audio has been paused!");
     });
   },
   handlePlayCurrentSong({ commit, dispatch, state }) {

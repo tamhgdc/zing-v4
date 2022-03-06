@@ -63,16 +63,16 @@ export default {
   z-index: 100;
 }
 .zm-lyric-container.active {
-  animation: slideUp 0.2s linear forwards;
+  animation: slideUp 0.4s linear forwards;
 }
 .zm-lyric-container.un-active {
-  animation: slideDown 0.2s linear forwards;
+  animation: slideDown 0.4s linear forwards;
 }
 .zm-lyric-container > .overlay.active {
-  animation: slideUp 0.2s linear forwards;
+  animation: slideUp 0.4s linear forwards;
 }
 .zm-lyric-container > .overlay.un-active {
-  animation: slideDown 0.2s linear forwards;
+  animation: slideDown 0.4s linear forwards;
 }
 .zm-lyric-container > .overlay {
   z-index: 1100;

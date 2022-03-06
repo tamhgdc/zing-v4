@@ -1,4 +1,5 @@
 export default {
+  handleLyric() {},
   handleNextSong({ commit, state }) {
     commit("destroy_audio", {});
     commit("set_current_time", 0);
@@ -100,6 +101,7 @@ export default {
         }
       }
     });
+    dispatch("handleLyric");
   },
   audioOnEnded({ state, commit, dispatch }) {
     state.audio.addEventListener("ended", () => {

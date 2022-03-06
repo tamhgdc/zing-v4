@@ -12,7 +12,7 @@
         :autoplaySpeed="3000"
       >
         <div v-for="(item, index) in data[0].items" :key="index">
-          <img class="rounded-md cursor-pointer" :src="item.banner" @click="seclecthisBanner(item)" />
+          <img v-lazy="item.banner" class="rounded-md cursor-pointer" :src="item.banner" @click="seclecthisBanner(item)" />
         </div>
       </VueSlickCarousel>
     </div>

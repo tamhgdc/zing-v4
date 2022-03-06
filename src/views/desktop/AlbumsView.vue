@@ -7,7 +7,7 @@
           <div class="media playlist-header sticky text-center">
             <div class="media-content font-bold">
               <figure class="zm-card-image rounded-md mb-3">
-                <img class="select-none" :src="albumData.thumbnailM" style="width: 100%" />
+                <img v-lazy="albumData.thumbnailM" class="select-none" :src="albumData.thumbnailM" style="width: 100%" />
               </figure>
               <h1 class="font-bold text-xl select-none">
                 {{ albumData.title }}
@@ -46,12 +46,27 @@
               >
                 <div class="mobile:col-span-2 tablet:col-span-2 col-span-2 ... flex items-center">
                   <span class="mr-2"><ThemifyIcon icon="music-alt" /></span>
-                  <img class="mr-2" style="width: 40px" :class="{ 'cursor-pointer': song.streamingStatus != 2 }" :src="song.thumbnail" />
+                  <div class="relative mr-2">
+                    <img
+                      v-lazy="song.thumbnail"
+                      class="mr-2"
+                      style="width: 40px"
+                      :class="{ 'cursor-pointer': song.streamingStatus != 2 }"
+                      :src="song.thumbnail"
+                    />
+                    <img
+                      v-if="isPlaying && currentIndex === index"
+                      class="mr-2 zm-sound-wave"
+                      style="width: 40px"
+                      :class="{ 'cursor-pointer': song.streamingStatus != 2 }"
+                      src="https://i.gifer.com/origin/b0/b04b49defbd804daf7a68a05f6923b4c_w200.gif"
+                    />
+                  </div>
                   <div class="zm-song-title">
                     <div>
                       <p class="text-white capitalize">
-                        {{ song.title }}
                         <span class="vip-member font-bold" v-if="song.streamingStatus === 2">VIP</span>
+                        {{ song.title }}
                       </p>
                       <p class="capitalize">{{ song.artistsNames }}</p>
                     </div>
@@ -121,7 +136,7 @@ export default {
         if (response.status) {
           this.loading = false;
           this.albumData = response.data;
-          this.$store.commit("set_title", response.data.title);
+          this.$store.commit("set_title", response.data.title + " | Album 320 lossless");
         } else {
           this.$router.push("/");
         }
@@ -212,6 +227,13 @@ export default {
   transform: scale(1.1) translateZ(0);
   filter: brightness(0.5) saturate(0.5) blur(1px);
 }
+.zm-sound-wave {
+  position: absolute;
+  transform: translate(0%, -100%);
+  width: 100%;
+  mix-blend-mode: hard-light;
+  height: 100%;
+}
 span.vip-member {
   background: #ffe000;
   border-radius: 4px;
@@ -219,6 +241,6 @@ span.vip-member {
   padding: 0 6px;
   font-size: 9px;
   margin: 0;
-  margin-left: 5px;
+  margin-right: 5px;
 }
 </style>

@@ -172,4 +172,9 @@ export default {
   }
 }
 /* Skeleton items */
+@media (min-width: 0px) and (max-width: 640px) {
+  .zm-section-skeleton {
+    grid-template-columns: auto;
+  }
+}
 </style>

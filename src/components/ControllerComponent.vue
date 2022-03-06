@@ -5,7 +5,7 @@
         <div class="player-controls-left">
           <div class="media">
             <div class="media-thumb" :class="{ ' playing-active': isPlaying }">
-              <img :src="currentAlbumData.song.items[currentIndex].thumbnail" />
+              <img v-lazy="currentAlbumData.song.items[currentIndex].thumbnail" :src="currentAlbumData.song.items[currentIndex].thumbnail" />
             </div>
             <div class="media-content">
               <p class="capitalize">{{ currentAlbumData.song.items[currentIndex].title }}</p>

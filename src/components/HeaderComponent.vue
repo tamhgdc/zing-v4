@@ -125,7 +125,7 @@ export default {
   height: 70px;
   padding: 0 30px;
   z-index: 10;
-  min-width: 660px;
+  /* min-width: 660px; */
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 }
 button {
@@ -197,7 +197,7 @@ button {
 .zm-reset-btn {
   display: none;
   position: absolute;
-  top: 14px;
+  top: 10px;
   right: -6px;
 }
 .zm-reset-btn i {
@@ -314,6 +314,11 @@ button {
   }
   to {
     left: 150%;
+  }
+}
+@media (min-width: 0px) and (max-width: 640px) {
+  .level-left {
+    margin-right: 0px;
   }
 }
 </style>

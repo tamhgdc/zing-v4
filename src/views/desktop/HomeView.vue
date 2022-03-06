@@ -11,7 +11,7 @@
               <div :title="item.title">
                 <figure class="zm-card-image rounded-md">
                   <router-link :to="item.link">
-                    <img class="select-none" width="100%" :src="item.thumbnail" />
+                    <img v-lazy="item.thumbnail" class="select-none" width="100%" :src="item.thumbnail" />
                   </router-link>
                   <router-link :to="item.link">
                     <span class="overlay">
@@ -42,7 +42,7 @@
               <div :title="item.title">
                 <figure class="zm-card-image rounded-md">
                   <router-link :to="item.link">
-                    <img class="select-none" width="100%" :src="item.thumbnail" />
+                    <img v-lazy="item.thumbnail" class="select-none" width="100%" :src="item.thumbnail" />
                   </router-link>
                   <router-link :to="item.link">
                     <span class="overlay">
@@ -73,7 +73,7 @@
               <div :title="item.title">
                 <figure class="zm-card-image rounded-md">
                   <router-link :to="item.link">
-                    <img class="select-none" width="100%" :src="item.thumbnail" />
+                    <img v-lazy="item.thumbnail" class="select-none" width="100%" :src="item.thumbnail" />
                   </router-link>
                   <router-link :to="item.link">
                     <span class="overlay">

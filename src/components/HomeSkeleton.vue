@@ -3,8 +3,8 @@
     <div class="zm-carousel-skeleton-container">
       <div class="zm-carousel-skeleton">
         <div class="zm-carousel-item skeleton-item"></div>
-        <div class="zm-carousel-item skeleton-item"></div>
-        <div class="zm-carousel-item skeleton-item"></div>
+        <div class="zm-carousel-item skeleton-item mobile:hidden tablet:hidden"></div>
+        <div class="zm-carousel-item skeleton-item mobile:hidden tablet:hidden"></div>
       </div>
     </div>
     <div class="skeleton-item skeleton-section-title"></div>
@@ -19,17 +19,17 @@
         <div class="skeleton-item skeleton-card-title"></div>
         <div class="skeleton-item skeleton-card-subtitle"></div>
       </div>
-      <div class="skeleton-section-card">
+      <div class="skeleton-section-card mobile:hidden">
         <div class="skeleton-item skeleton-section-card-thumb"></div>
         <div class="skeleton-item skeleton-card-title"></div>
         <div class="skeleton-item skeleton-card-subtitle"></div>
       </div>
-      <div class="skeleton-section-card">
+      <div class="skeleton-section-card mobile:hidden tablet:hidden">
         <div class="skeleton-item skeleton-section-card-thumb"></div>
         <div class="skeleton-item skeleton-card-title"></div>
         <div class="skeleton-item skeleton-card-subtitle"></div>
       </div>
-      <div class="skeleton-section-card">
+      <div class="skeleton-section-card mobile:hidden tablet:hidden">
         <div class="skeleton-item skeleton-section-card-thumb"></div>
         <div class="skeleton-item skeleton-card-title"></div>
         <div class="skeleton-item skeleton-card-subtitle"></div>
@@ -55,36 +55,35 @@ export default {
 }
 .skeleton-grid {
   display: grid;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   grid-column-gap: 26px;
 }
 .zm-carousel-item {
-  min-width: 315px;
+  /* min-width: 315px; */
   width: 100%;
   height: 176px;
   border-radius: 12px;
 }
 .skeleton-section-card-thumb {
-  height: 180px;
-  min-width: 180px;
+  height: 283%;
   width: 100%;
   border-radius: 12px;
 }
 .skeleton-card-title {
   margin-top: 9px;
   height: 14px;
-  width: 175px;
+  width: 100%;
   border-radius: 50px;
 }
 .skeleton-card-subtitle {
   margin-top: 9px;
   height: 14px;
-  width: 150px;
+  width: 80%;
   border-radius: 6px;
 }
 .skeleton-section-title {
   height: 26px;
-  width: 250px;
+  width: 30%;
   margin-bottom: 16px;
   border-radius: 50px;
 }
@@ -112,6 +111,28 @@ export default {
   }
   to {
     left: 150%;
+  }
+}
+@media (min-width: 641px) and (max-width: 768px) {
+  .skeleton-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-column-gap: 12px;
+  }
+  .skeleton-section-card-thumb {
+    height: 365%;
+  }
+  .zm-carousel-skeleton {
+    grid-template-columns: auto;
+  }
+}
+@media (min-width: 0px) and (max-width: 640px) {
+  .zm-carousel-skeleton {
+    grid-template-columns: auto;
+  }
+  .skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-column-gap: 8px;
   }
 }
 </style>

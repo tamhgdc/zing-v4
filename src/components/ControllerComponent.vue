@@ -377,6 +377,33 @@ export default {
   -webkit-appearance: none;
   -webkit-transition: 0.2s;
 }
+.zm-duration-bar input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.zm-duration-bar input::-moz-range-thumb {
+  -webkit-appearance: none;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.zm-duration-bar input::-ms-thumb {
+  -webkit-appearance: none;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+}
+
 .btn-shuffle.active,
 .btn-repeat.active {
   color: #c662ef;

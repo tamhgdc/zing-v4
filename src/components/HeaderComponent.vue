@@ -14,7 +14,7 @@
               <input type="text" placeholder="Nhập tên bài hát, nghệ sĩ hoặc MV…" @input="handleSearch" />
             </div>
           </div>
-          <button type="reset" class="zm-btn zm-reset-btn">
+          <button type="reset" class="zm-reset-btn">
             <ThemifyIcon icon="close" />
           </button>
           <ul class="search-sugestion">
@@ -202,7 +202,8 @@ button {
   display: none;
   position: absolute;
   top: 10px;
-  right: -6px;
+  right: 0;
+  padding: 0 15px;
 }
 .zm-reset-btn i {
   font-size: 12px;

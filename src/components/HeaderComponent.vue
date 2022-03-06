@@ -2,6 +2,7 @@
   <header class="zm-header">
     <div class="level">
       <div class="level-left">
+        <button class="zm-btn md:hidden" @click="toggleSidebar()"><ThemifyIcon icon="menu" /></button>
         <button class="zm-btn mobile:hidden tablet:hidden"><ThemifyIcon icon="arrow-left" /></button>
         <button class="zm-btn mobile:hidden tablet:hidden"><ThemifyIcon icon="arrow-right" /></button>
         <form class="search">
@@ -107,6 +108,9 @@ export default {
         .catch((e) => {
           console.log(e);
         });
+    },
+    toggleSidebar() {
+      this.$store.commit("set_toggle_sidebar", !this.$store.state.toggleSidebar);
     },
   },
 };
@@ -303,9 +307,30 @@ button {
 .search-sugestion .sugest__item i {
   margin-right: 10px;
 }
-@media screen and (max-width: 640px) {
+@media (min-width: 0px) and (max-width: 640px) {
+  .level-left {
+    margin-right: 0px;
+    justify-content: center !important;
+  }
   .zm-header {
-    padding: 6px;
+    padding: 10px;
+  }
+  .zm-btn > i {
+    margin-right: 10px;
+  }
+}
+@media (min-width: 641px) and (max-width: 768px) {
+  .level-left {
+    margin-right: 0px;
+    justify-content: center !important;
+  }
+  .zm-btn > i {
+    margin-right: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .toggle-sidebar-expand .zm-header {
+    left: 0;
   }
 }
 @keyframes skeletonLoading {
@@ -314,11 +339,6 @@ button {
   }
   to {
     left: 150%;
-  }
-}
-@media (min-width: 0px) and (max-width: 640px) {
-  .level-left {
-    margin-right: 0px;
   }
 }
 </style>

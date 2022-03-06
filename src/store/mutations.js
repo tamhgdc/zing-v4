@@ -24,8 +24,17 @@ export default {
   set_home_data(state, data) {
     state.homeData = data;
   },
+  set_toggle_sidebar(state, status) {
+    state.toggleSidebar = status;
+  },
   set_controller_status(state, status) {
     state.isControllerShow = status;
+  },
+  set_lyric_show(state, status) {
+    state.lyricStatus.isUp = status;
+  },
+  set_lyric_hide(state, status) {
+    state.lyricStatus.isDown = status;
   },
   set_initial_time(state, valueInMinute) {
     state.initialTimestamp = new Date().valueOf() + 60000 * valueInMinute;

@@ -104,6 +104,9 @@ aside {
   padding-bottom: 55px;
   z-index: 20;
 }
+.zm-sidebar {
+  transition: transform linear 0.2s;
+}
 .zm-sidebar .zm-sidebar-wrapper {
   display: flex;
   flex-direction: column;
@@ -267,6 +270,11 @@ aside {
   .add-playlist-sidebar,
   .vip-banner-sidebar {
     display: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  .toggle-sidebar-expand .zm-sidebar {
+    transform: translateX(-100%);
   }
 }
 </style>

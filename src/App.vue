@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="zm-layout" :class="{ 'has-player': isControllerShow }">
+    <div class="zm-layout" :class="{ 'has-player': isControllerShow, 'toggle-sidebar-expand': toggleSidebar }">
       <sidebar-component />
       <header-component />
       <div class="zm-mainpage">
@@ -8,6 +8,7 @@
       </div>
       <controller-component />
     </div>
+    <lyric-component />
   </div>
 </template>
 
@@ -16,10 +17,11 @@ import { mapState } from "vuex";
 import SidebarComponent from "@/components/SidebarComponent.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
 import ControllerComponent from "@/components/ControllerComponent.vue";
+import LyricComponent from "@/components/LyricComponent.vue";
 import Zingmp3 from "@/services/api.service.js";
 
 export default {
-  components: { SidebarComponent, HeaderComponent, ControllerComponent },
+  components: { SidebarComponent, HeaderComponent, ControllerComponent, LyricComponent },
   async mounted() {
     this.$store.commit("set_toast", this.$toastr);
     this.$store.commit("set_alertify", this.$alertify);
@@ -44,6 +46,7 @@ export default {
       "currentIndex",
       "isControllerShow",
       "currentAlbumData",
+      "toggleSidebar",
       "currentSongSrc",
       "currentSongEncodeId",
       "currentSong",
@@ -99,6 +102,7 @@ body ::-webkit-scrollbar-thumb {
   height: 100%;
   color: #fff;
   overflow: hidden scroll;
+  transition: transform linear 0.2s;
 }
 
 .zm-mainpage main {
@@ -107,7 +111,7 @@ body ::-webkit-scrollbar-thumb {
 
 @media screen and (max-width: 640px) {
   .zm-mainpage main {
-    padding: 6px;
+    padding: 10px;
   }
 }
 @media screen and (max-width: 1133px) {
@@ -120,6 +124,12 @@ body ::-webkit-scrollbar-thumb {
   }
   .zm-header {
     left: calc(240px - 170px);
+  }
+}
+@media screen and (max-width: 768px) {
+  .toggle-sidebar-expand .zm-mainpage {
+    margin-left: 0;
+    width: 100%;
   }
 }
 </style>

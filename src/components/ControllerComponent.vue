@@ -71,7 +71,12 @@
             <span class="time-right">{{ fmtMSS(currentAlbumData.song.items[currentIndex].duration) }}</span>
           </div>
         </div>
-        <div class="player-controls-right">Right</div>
+        <div class="player-controls-right">
+          <button class="" @click="showLyric">
+            <ThemifyIcon class="mr-1" icon="microphone-alt" />
+            <span>Lyric</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -128,6 +133,10 @@ export default {
       this.$store.commit("set_is_shuffle", !this.isShuffle);
       this.isShuffle ? this.$toastr.i("Bạn vừa bật chức năng phát ngẫu nhiên") : this.$toastr.i("Bạn vừa tắt chức năng phát ngẫu nhiên");
     },
+    showLyric() {
+      this.$store.commit("set_lyric_show", true);
+      this.$store.commit("set_lyric_hide", false);
+    },
   },
   computed: {
     ...mapState([
@@ -139,6 +148,7 @@ export default {
       "isShuffle",
       "isControllerShow",
       "currentAlbumData",
+      "isShowLyric",
       "currentSongData",
       "currentSongSrc",
       "currentSongEncodeId",

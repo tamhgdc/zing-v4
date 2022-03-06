@@ -4,6 +4,11 @@ export default {
   alertify: null,
   homeData: false,
   isPlaying: false,
+  lyricStatus: {
+    isUp: false,
+    isDown: false,
+  },
+  toggleSidebar: true,
   isLoadingToPlay: false,
   title: "Zing MP3 | Nghe tải nhạc chất lượng cao",
   initialTimestamp: new Date().valueOf() + 60000 * 60 /* Set initial time for an hour*/,

@@ -67,6 +67,7 @@ export default {
 .skeleton-section-card-thumb {
   height: 283%;
   width: 100%;
+  min-width: unset;
   border-radius: 12px;
 }
 .skeleton-card-title {

@@ -152,10 +152,6 @@ export default {
 .zm-card-image img {
   transition: all 0.7s;
 }
-.zm-card-image:hover img {
-  transform: scale(1.1) translateZ(0);
-  filter: brightness(0.5) saturate(0.5) blur(1px);
-}
 .zm-card-image .overlay {
   position: absolute;
   height: 100%;
@@ -246,6 +242,16 @@ export default {
   transform: rotate(15deg);
   background: linear-gradient(to right, transparent 0%, #ffffff1f 50%, transparent 100%);
   animation: skeletonLoading 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@media (min-width: 768px) {
+  .zm-card-image:hover > img {
+    transform: scale(1.1) translateZ(0);
+    filter: brightness(0.5) saturate(0.5) blur(1px);
+  }
+  .zm-card-image:hover img.zm-sound-wave-thumb {
+    transform: unset;
+    filter: unset;
+  }
 }
 @keyframes skeletonLoading {
   from {

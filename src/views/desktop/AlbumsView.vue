@@ -8,6 +8,11 @@
             <div class="media-content font-bold">
               <figure class="zm-card-image rounded-md mb-3">
                 <img v-lazy="albumData.thumbnailM" class="select-none" :src="albumData.thumbnailM" style="width: 100%" />
+                <img
+                  v-show="isPlaying"
+                  class="mr-2 zm-sound-wave-thumb"
+                  src="https://cdn.dribbble.com/users/1371241/screenshots/6829039/07-wave.gif"
+                />
               </figure>
               <h1 class="font-bold text-xl select-none">
                 {{ albumData.title }}
@@ -223,10 +228,6 @@ export default {
 .zm-card-image img {
   transition: all 0.7s;
 }
-.zm-card-image:hover img {
-  transform: scale(1.1) translateZ(0);
-  filter: brightness(0.5) saturate(0.5) blur(1px);
-}
 .zm-sound-wave {
   position: absolute;
   transform: translate(0%, -100%);
@@ -242,5 +243,25 @@ span.vip-member {
   font-size: 9px;
   margin: 0;
   margin-right: 5px;
+}
+.zm-sound-wave-thumb {
+  position: absolute;
+  transform: translate(0%, -100%);
+  width: 100%;
+  height: 100%;
+  mix-blend-mode: screen;
+}
+img.zm-sound-wave-thumb {
+  transition: all 0.7s linear;
+}
+@media (min-width: 768px) {
+  .zm-card-image:hover > img {
+    transform: scale(1.1) translateZ(0);
+    filter: brightness(0.5) saturate(0.5) blur(1px);
+  }
+  .zm-card-image:hover img.zm-sound-wave-thumb {
+    filter: unset;
+    transform: translateY(-100%);
+  }
 }
 </style>

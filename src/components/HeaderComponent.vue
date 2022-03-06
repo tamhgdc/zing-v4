@@ -19,6 +19,11 @@
           </button>
           <ul class="search-sugestion">
             <div class="sugestion__wrapper">
+              <template v-if="!searchData">
+                <div class="mt-3">
+                  <div class="search-title">Chưa có kết quả tìm kiếm nào...</div>
+                </div>
+              </template>
               <template v-if="searchData">
                 <template v-if="searchData.top">
                   <div class="mb-4">
@@ -269,7 +274,7 @@ button {
   position: absolute;
   overflow: scroll;
   width: 100%;
-  max-height: 70vh;
+  max-height: 45vh;
   /* min-height: 0; */
   background: #432275;
   z-index: 5;
